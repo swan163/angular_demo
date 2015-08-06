@@ -1,14 +1,120 @@
 <!DOCTYPE HTML>
-<html lang="en-US" ng-app>
+<html lang="en-US">
 <head>
 	<meta charset="UTF-8">
 	<title>测试</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-	<script src="./angular.js"></script>
+	
 </head>
 <body>
+<!-- <section ng-app="">
 		Your name: <input type="text" ng-model="yourname" placeholder="World">
         	<hr>
-		hello {{yourname || world}}!
+		<p>hello {{yourname || world}}!</p>
+		<hr>
+		<p ng-init="quantity=1;cost=5">我的第一个表达式：{{ 5 + cost }} </p>
+		<hr>
+		<p>字符串：{{ '兰鸿' + "&" + '李' }} </p>
+		<hr>
+		<p ng-init='person={"name":"swan",lastName : "li"}'>
+			对象: {{ person.name }}
+		</p>
+		<hr>
+		<p ng-init="arry=[one,923,pp,00]">
+			array: {{ arry[1] }}
+		</p>
+		<hr>
+		<p ng-init="quantity=1;price=5">指令  --- 计算器</p>
+
+		数量：<input type="number" ng-model="quantity">
+		价格：<input type="number" ng-model="price">
+		<p>
+			总价: {{ quantity * price }}
+		</p>
+		<hr>
+		<p ng-init="names=['test1','test2','test3']">重复HTML元素</p>
+		<ul>
+			<p>ng-repeat指令重复一个HTML元素</p>
+			<li ng-repeat="x in names">
+				{{ x }}
+			</li>
+		</ul>
+		
+		<p ng-init="arrJson=[
+			{'address':'海角', 'person':'我'},
+			{'address':'企水', 'person':'他'},
+			{'address':'雷州', 'person':'她'}
+		]">重复多维数据</p>
+		<ul>
+			<li ng-repeat="x in arrJson">
+				{{ x.person + "住在：" + x.address }}
+			</li>
+		</ul>
+		<hr>
+		<p>ng-controller定义应用程序控制器</p>
+		<div ng-controller="personController">
+			姓：<input type="text" ng-model="person.firstName"></br>
+			名：<input type="text" ng-model="person.lastName"></br>
+			姓名：{{ person.firstName + "-" + person.lastName }}
+			姓名 : {{ person.fullName() }}
+		</div>
+		<ul ng-controller= "namerCtrol">
+			<li ng-repeat="x in names">
+				{{ x.name + "住在：" + x.ctry }}
+			<li>
+		</ul>
+		<hr>
+		<p>过滤器</p>
+		<p>转换成大写 uppercase</p>
+		<div ng-controller="personController">
+			lastName: {{ person.lastName | uppercase }}
+		</div>
+		<p>数字转换成货币 currency</p>
+		<div ng-controller='costCtrol'>
+			num : <input type="number" ng-model="cost.quantity">
+			price : <input type="number" ng-model="cost.price"></br>
+			总价: {{ cost.quantity * cost.price | currency }}
+		</div>
+		<div ng-controller="namerCtrol">
+			<p>循环对象: orderBy 根据表达式排序数组 </p>
+			<ul>
+			  <li ng-repeat="x in names | orderBy:'name'">
+			    {{ x.name + ', ' + x.ctry }}
+			  </li>
+			</ul>
+			<p>过滤filter</p>
+			<p>输入过滤词: <input type="text" ng-model="name"></p>
+			<ul>
+				<li ng-repeat="x in names | filter:name | orderBy: 'ctry'">
+					{{ (x.name | uppercase) + ',' + x.ctry }}
+				</li>
+			</ul>
+		</div>
+		<hr>
+		<p>http请求服务器的数据</p>
+		<div ng-controller="customersController">
+			<ul>
+			  <li ng-repeat="x in names | orderBy:'City'">
+			    {{ x.Name + ', ' + x.City }}
+			  </li>
+			</ul>
+		</div>
+		<hr>
+</section> -->
+<div ng-app="myApp" ng-controller="myCtrl">
+{{ personTest.ming + " " + personTest.xing }}
+</div>
+
+<script src="//www.runoob.com/try/angularjs/1.2.5/angular.min.js"></script>
+<script src="mod_app.js"></script>
+<script src="mod_ctrl.js"></script>
+<script src="personCtrol.js"></script>
+<script type="text/javascript">
+	function customersController($scope, $http) {
+		$http.get("data.js").success(function(data) {
+			$scope.names = data;
+		})
+	}
+</script>
 </body>
 </html>

@@ -1,0 +1,19 @@
+<hr/>
+<h3>Route : 列表页</h3>
+
+<!-- <ul ng-init="list=[{id:'1','name':'swan'},{id:'2','name':'hung'},{id:'3','name':'lisan'}]">
+<li ng-repeat="x in list">
+<a href="#/test/{{ x.id }}"> ID {{ x.id }},<em style="color:red;font-size:14px;">{{ x.name }}</em></a>
+</li>
+</ul> -->
+
+<ul>
+	<li ng-repeat="news in newList" style="font-size:14px;">
+		<a href="#/test/{{ news.id }}"> 
+			ID : {{ news.id }}   
+			<em style="color:red;">名字：{{ news.Name }}</em>
+			<em style="color:green;">城市：{{ news.City }}</em>
+			<em style="color:#f80;">国家：{{ news.Country }}</em>
+		</a>
+	</li>
+</ul>
