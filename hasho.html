@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>route</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<style type="text/css">
+		*{
+			font-style: normal;
+			font-size: 16px;
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		li{
+			line-height: 25px;
+		}
+		body{
+			margin:10px;
+		}
+		hr{
+			margin:20px 0;
+		}
+		#hash{
+			width: 200px;
+			height: 25px;
+			display: block;
+			border:1px solid #ccc;
+			text-align: center;
+			margin:15px;
+		}
+	</style>
+</head>
+<body>
+	<h1>原页面</h1>
+	<div id="clones">
+		复制复制复制复制复制复制复制
+	</div>
+	<span id="hash">you jump I jump</span>
+</body>
+<script type="text/javascript" src='http://portal.ucgc.ucfly.com/public/javascripts/pc2/lib/jquery.js'></script>
+<script type="text/javascript">
+	$(function () {
+		$("#hash").click(function() {
+			ajaxGet();
+			window.location.hash = "#/hashRequest"
+		});
+
+		function ajaxGet() {
+			$.ajax({
+				type : 'post',
+				data :'',
+				url : 'hashj.html',
+				success : function(html) {
+					var cloneHTML = $("#clones").clone();
+					$("body").html(html).append(cloneHTML);
+				}
+			})
+		}
+		var url = window.location.href;
+		function doHash() {
+			var hash = location.hash; 
+			switch(hash){   
+			case "#/hashRequest": 
+			    ajaxGet();
+			    break;    
+			default :    
+			    window.location.href = url
+			    break;
+			}
+		}
+		
+		$(window).on('hashchange', function(){
+		 	doHash();
+		});
+		
+		function loads () {
+			var hash = location.hash;
+			if (hash == "#/hashRequest") {
+				ajaxGet();
+			}
+		}
+
+		loads()
+	})
+</script>
+</html>
