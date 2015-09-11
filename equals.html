@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-example46-production</title>
+  
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+  
+
+  
+</head>
+<body>
+  <div ng-app="test">
+    <div ng-controller="testCtrl" ng-init='foo=1'>
+      <div ng-hide="isEmpty(foo)">{{bar}}</div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var test = angular.module('test', []);
+
+    test.controller('testCtrl', ['$scope',
+      function($scope) {
+        $scope.foo = {};
+        $scope.bar = "bameee";
+        $scope.isEmpty = function(obj) {
+          return angular.equals(obj,{});
+        };
+      }
+    ]);
+  </script>
+</body>
+</html>

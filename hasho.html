@@ -31,20 +31,20 @@
 		}
 	</style>
 </head>
-<body>
-	<h1>原页面</h1>
-	<div id="clones">
-		复制复制复制复制复制复制复制
+<body id="main">
+	<div class="obj">
+		<h1>原页面</h1>
+		<div class="clones">复制复制复制复制复制复制复制</div>
 	</div>
-	<span id="hash">you jump I jump</span>
+	<a href="#/hashRequest" id="hash">you jump I jump</a>
 </body>
 <script type="text/javascript" src='http://portal.ucgc.ucfly.com/public/javascripts/pc2/lib/jquery.js'></script>
 <script type="text/javascript">
 	$(function () {
-		$("#hash").click(function() {
-			ajaxGet();
-			window.location.hash = "#/hashRequest"
-		});
+		// $("#hash").click(function() {
+		// 	ajaxGet();
+		// 	window.location.hash = "#/hashRequest"
+		// });
 
 		function ajaxGet() {
 			$.ajax({
@@ -52,8 +52,9 @@
 				data :'',
 				url : 'hashj.html',
 				success : function(html) {
-					var cloneHTML = $("#clones").clone();
+					var cloneHTML = $(".clones").clone();
 					$("body").html(html).append(cloneHTML);
+					returnEdit();
 				}
 			})
 		}
@@ -81,7 +82,17 @@
 			}
 		}
 
-		loads()
+		loads();
+
+
+		function returnEdit () {
+			$("#wrap").css({
+				color : "#f80",
+			});
+			$(".clones").css({
+				color : "red"
+			})
+		}
 	})
 </script>
 </html>
