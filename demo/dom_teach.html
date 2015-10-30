@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>模板数据绑定</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<style type="text/css">
+		body{
+			padding: 40px 20px;
+		}
+	</style>
+	<script src="//www.runoob.com/try/angularjs/1.2.5/angular.min.js"></script>
+</head>
+<body>
+<section ng-app="myApp">
+	<div ng-controller="testC">
+	    <h1>{{question.newtitle}}</h1>
+	    题目:<input type="text" ng-model="question.name" /><br />
+	    分数:<input type="text" ng-model="question.fraction" fraction-num/><br />
+	    类型:<select ng-model="question.type">
+	    		<option value="1" selected>单选</option>
+	    		<option value="2">多选</option>
+	    	</select><br />
+	    选项:<button ng-click="addOption()">增加选项</button><br />
+	    <ul>
+	    	<li ng-repeat="o in question.options">
+	    		<b> {{ $index + 1}}. </b> <!-- 花括号只是单向绑定数据，添加ng-module才是双向绑定数据 -->
+	    		<input type="text" value="o.content" ng-module="o.content">
+	    		<a href="javascript:void(0)" ng-click="delOption($index)">删除</a>
+	    	</li>
+	    </ul><br/>
+	    模板：<p>
+	    	<b ng-repeat="t in templates">{{t}}<br /></b>
+	    	</p>
+	    <hr>
+	    <div>
+	    	<h1>{{question.previewtitle}}</h1>
+	    	<!-- 调用自定义过滤器 xx | 过滤器名 -->
+	    	<b>题目：{{ question.type | typeFilter}} {{question.name}}</b><br/>
+	    	<b>分数: {{question.fraction}}分</b>
+	    	<ul>
+	    		<li ng-repeat="o in question.options">
+	    			<b> {{$index + 1}} </b>
+	    			<input type="radio" name="optcheck" ng-show="question.type==1" />
+                	<input type="checkbox" ng-show="question.type==2" />
+	    			{{o.content}}
+	    		</li>
+	    	</ul>
+	    </div>
+	</div>
+</section>
+<script>
+	var app = angular.module('myApp',[], function() {
+		console.log('started');
+	});
+	var questionModel = {
+		newtitle : '新建试题',
+		previewtitle : '预览试题',
+		name : '',
+		fraction : '',
+		type : '1',
+		options : []
+	}
+	app.controller('testC', function($scope,tpls) {
+		$scope.question = questionModel;
+		$scope.nowTime = new Date().valueOf();
+		$scope.templates = tpls;
+		$scope.addOption = function() {
+			var o = {content:''};
+			$scope.question.options.push(o);
+		};
+		$scope.delOption = function(index) {
+			$scope.question.options.splice(index,1);
+		}
+	});
+	// 过滤器
+	app.filter('typeFilter',function() {
+		var f = function(input) {
+			return input == '1' ? '单选题' : '多选题';
+		}
+		return f;
+	});
+	// 自定义指令
+	app.directive('fractionNum', function() {
+		return {
+			// form : https://github.com/nixzhu/dev-blog/blob/master/2014-05-03-creating-custom-angularjs-directives-part-1-the-fundamentals.md
+			/*restrict: 'EA', //E = element（元素）, A = attribute（属性）, C = class, M = comment         
+			scope: {
+			//@ reads the attribute value, = provides two-way binding, & works with functions
+			//@ 读取属性值， = 提供双向绑定， & 以函数一起工作
+			title: '@'         },
+			template: '<div>{{ myVal }}</div>',
+			templateUrl: 'mytemplate.html',
+			controller: controllerFunction, //Embed a custom controller in the directive 在指令中嵌入一个自定义控制器*/
+			link : function(scope, elements, attrs) {
+				elements[0].onkeyup = function() {
+					if(isNaN(this.value) || this.value < 1 || this.value > 10) {
+						this.style.borderColor = 'red';
+					} else {
+						this.style.borderColor = '';
+					}
+				}
+			}
+		}
+	});
+	// 自定义服务
+	app.factory('tpls', function() {
+		return ['tpl1','tpl2','tpl3','tpl4'];
+	})
+</script>
+</body>
+</html> 

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>demo1</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<style type="text/css">
+		body{
+			padding: 40px 50px;
+		}
+	</style>
+	<script src="//www.runoob.com/try/angularjs/1.2.5/angular.min.js"></script>
+</head>
+<body>
+<h1>
+	dome_01
+</h1>
+<section ng-controller="WelcomeController">
+	{{greeting}}
+</section></br>
+
+<div ng-app="myapp">
+	<div ng-controller="ctrl">
+		obj1: {{ object1 }}</br>
+		obj2: {{ object2 }}</br>
+		<p>Are they equal?{{ equals }}</p></br></br>
+		<p>angular.extend-->{{ object2 }}</p></br></br>
+		<p>当前符合misko字段：{{curs}}</p></br>
+		<p>测试identity方法: {{intoTwo}} </p></br>
+	</div>
+</div>
+
+
+
+<script>
+ /* var app = angular.module('demo', [])
+  .controller('WelcomeController', function($scope) {
+      $scope.greeting = 'Welcome!';
+  });
+  angular.bootstrap(document, ['demo']);*/
+  var app = angular.module('myapp', []);
+  app.controller('ctrl', function($scope) {
+	var obj1 = {
+		"obj_01": "obj1_01",
+		"obj_02": {a: "aao1", b: "bbo1"}
+	}
+	var obj2 = {		
+		"swan": "obj2_01",
+		"hung": "obj2_02",
+		"array": {a: "aao2", b: "bbNewo2"}
+	}
+	$scope.object1 = obj1;
+	$scope.object2 = obj2;
+	$scope.equals = angular.equals(obj1, obj2);
+	angular.extend($scope.object2, $scope.object1);
+	var values = {name: 'misko', gender: 'male'};
+	var log = [];
+	var curt = "";
+	angular.forEach(values, function(value, key) {		
+		if(value == 'misko') {
+			curt = "找到了";
+			return;
+		}
+		this.push(key + ': ' + value);
+		console.log("=")
+	}, log);
+	console.log(log,curt);
+	$scope.curs = curt;
+	$scope.initVal = 5;
+	$scope.multplybyTwo = function (n) {
+		console.log(n * 2,n)
+  		return n * 2
+	};
+	$scope.givemeResult = function(fn, val) {
+		return (fn || angular.identity)(val);
+	}
+	$scope.intoTwo = $scope.givemeResult($scope.multplybyTwo, $scope.initVal);
+  })
+
+
+</script>
+</body>
+</html> 

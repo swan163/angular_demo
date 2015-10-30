@@ -5,8 +5,8 @@ routeApp.value('appName', 'MyCoolApp');
 
 routeApp.config(['$routeProvider',function ($routeProvider) {
       $routeProvider.when('/test', {
-        templateUrl: 'test.html',
-        controller: 'RouteListCtl'
+        templateUrl: 'test.html',// 模板地址
+        controller: 'RouteListCtl'//控制器name
       }).when('/test/:id', {
           templateUrl: 'test2.html',
           controller: 'RouteDetailCtl'

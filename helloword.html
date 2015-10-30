@@ -55,8 +55,8 @@
 		<div ng-controller="personController">
 			姓：<input type="text" ng-model="person.firstName"></br>
 			名：<input type="text" ng-model="person.lastName"></br>
-			姓名：{{ person.firstName + "-" + person.lastName }}
-			姓名 : {{ person.fullName() }}
+			姓名：{{ person.firstName + "-" + person.lastName }}</br>
+			全名 : {{ person.fullName() }}
 		</div>
 		<ul ng-controller= "namerCtrol">
 			<li ng-repeat="x in names">
@@ -117,4 +117,4 @@
 	}
 </script>
 </body>
-</html>
+</html> 
